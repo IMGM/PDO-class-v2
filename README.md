@@ -4,13 +4,15 @@ PDO-class-v2
 Object oriented PDO class
 
 
-PDO-class-v2.php file is used for connecting server with prepared statement,
+PDO-class-v2.php file is used for connecting server with prepared statement.
 
-process method accepts all Sql queries. (By default it accepts 3 statement (INSERT, SELECT, UPDATE))
+'process' method accepts all Sql queries.
 
-you can enable the remaining queries in 
+By default it accepts 3 statement (INSERT, SELECT, UPDATE).
 
-please read the codes carefully before using it.
+you can enable the remaining queries in line no.19;
+
+**please read all codes carefully before using it.
 
 
 //example-1
