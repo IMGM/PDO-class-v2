@@ -1,5 +1,5 @@
 <?php
-require_once("index.php");
+require_once("index.php"); //Caution : by default it connects with index.php 
 Interface Browse{
     public function __construct();
     public function __destruct();
@@ -16,7 +16,7 @@ class Connect implements Browse{
     
     public function process($Query, $value = array()){   
         try{
-            $pattern = "/^(SELECT)|^(INSERT)|^(UPDATE)/"; // $matches returns 3 arrays for this expression
+            $pattern = "/^(SELECT)|^(INSERT)|^(UPDATE)/"; // for more statement add after update statement(^(UPDATE)|)
             if(preg_match($pattern, $Query, $matches) === 1):          
                 $ready = $this->conn->prepare($Query);
                 $array = array_combine(array_keys(array_fill("1", count($value), ":")), $value);
@@ -41,7 +41,7 @@ class Connect implements Browse{
     
     public function __construct(){
         $connectionString = sprintf("mysql:host=%s; dbname=%s; charset=utf8", 
-                                CommunItY::community_host, CommunItY::community_db);
+                                Connect::community_host, Connect::community_db);
         try{
             $this->conn = new PDO($connectionString, Connect::db_username, Connect::db_password);
             $this->conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);    
@@ -62,3 +62,18 @@ class Connect implements Browse{
         return $this->trace;
    }//end of method
 }
+
+//example-1
+$call = new Connect();
+        $call->process("INSERT INTO table VALUES (?, ?)", array("ID1234", "Name1")); 
+        echo $call->trace();
+        
+//example-1
+$call = new Connect();
+        $getch =  $call->process("SELECT * FROM table", array(""));
+        foreach($getch as $key => $value)
+        {
+            echo "-->$key-->$value[0]<br>";
+        }
+        echo $call->trace();
+
