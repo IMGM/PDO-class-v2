@@ -68,7 +68,7 @@ $call = new Connect();
         $call->process("INSERT INTO table VALUES (?, ?)", array("ID1234", "Name1")); 
         echo $call->trace();
         
-//example-1
+//example-2
 $call = new Connect();
         $getch =  $call->process("SELECT * FROM table", array(""));
         foreach($getch as $key => $value)
